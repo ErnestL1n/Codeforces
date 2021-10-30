@@ -6,23 +6,18 @@ typedef unsigned long long ull;
 void foo() {
   ll n, k, res = 0;
   cin >> n >> k;
-  ll cur = 0;
+  ll cur = 1;
   if (k == 1) {
     cout << n - 1 << "\n";
     return;
   }
-  ll times = ceil(log(k) / log(2));
-
-  res += times;
-  // cout << times << "\n";
-  cur += pow(2, times);
-  if (n > cur) {
-    ll times2 = (n - cur) / k;
-    cur += times2 * k;
-    res += times2;
+  while (k >= cur and n > cur) {
+    cur *= 2;
+    ++res;
   }
-
-  cout << (cur >= n ? res : res + 1) << "\n";
+  cur = (n - cur + k - 1) / k;
+  res += cur;
+  cout << res << "\n";
 }
 
 int main() {
